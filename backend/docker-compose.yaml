@@ -1,0 +1,19 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+      POSTGRES_PORT: ${PGPORT}
+    ports:
+      - 5432:5432
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 5000:5000
